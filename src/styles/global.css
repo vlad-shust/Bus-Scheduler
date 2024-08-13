@@ -1,0 +1,39 @@
+.block-title {
+	font-family: 'Inter', sans-serif;
+	color: #1A1A1A;
+  font-weight: 600;
+  font-size: 14px;
+	line-height: 24px;
+}
+
+.block-subtitle {
+	font-family: 'Inter', sans-serif;
+	color: #33373C;
+  font-weight: 600;
+  font-size: 12px;
+	line-height: 16px;
+}
+
+.tabs-title {
+	font-family: 'Inter', sans-serif;
+	color: #33373C;
+	margin-right: 2rem;
+  font-weight: 500;
+  font-size: 14px;
+	line-height: 24px;
+	cursor: pointer;
+}
+
+.stop-item {
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 16px;
+	border-left: none;
+	border-right: none;
+	cursor: pointer;
+}
+
+.stop-item.selected {
+	color: #1952E1;
+}
