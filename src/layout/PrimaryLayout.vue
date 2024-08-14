@@ -13,6 +13,6 @@
 <style>
   .layout {
     padding: 40px 32px;
-    overflow: hidden;;
+    overflow: hidden;
   }
 </style>

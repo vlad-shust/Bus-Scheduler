@@ -1,52 +1,52 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
-import { useStore } from 'vuex';
+  import { computed, ref } from 'vue';
+  import { useStore } from 'vuex';
 
-const store = useStore();
-const selectedBusLine = computed(() => store.state.timetable.selectedBusLine);
-const selectedStop = computed(() => store.state.timetable.selectedStop);
+  const store = useStore();
+  const selectedBusLine = computed(() => store.state.timetable.selectedBusLine);
+  const selectedStop = computed(() => store.state.timetable.selectedStop);
 
-const isSortingStopsAsc = ref(true);
-const isSortingTimesAsc = ref(true);
+  const isSortingStopsAsc = ref(true);
+  const isSortingTimesAsc = ref(true);
 
-const toggleSortStops = () => isSortingStopsAsc.value = !isSortingStopsAsc.value;
-const toggleSortTimes = () => isSortingTimesAsc.value = !isSortingTimesAsc.value;
+  const toggleSortStops = () => isSortingStopsAsc.value = !isSortingStopsAsc.value;
+  const toggleSortTimes = () => isSortingTimesAsc.value = !isSortingTimesAsc.value;
 
-const sortedStopsByBusLine = computed(() => {
-  return [...stopsByBusLine.value].sort((a, b) => 
-    isSortingStopsAsc.value
-      ? a.stop.localeCompare(b.stop)
-      : b.stop.localeCompare(a.stop)
-  );
-});
-
-const sortedTimesForStopInBusLine = computed(() => {
-  const timeToDate = (time: string): Date => {
-    const [hours, minutes] = time.split(':').map(Number);
-    return new Date(0, 0, 0, hours, minutes);
-  };
-
-  return [...timesForStopInBusLine.value].sort((a, b) => {
-    const timeA = timeToDate(a);
-    const timeB = timeToDate(b);
-
-    return isSortingTimesAsc.value
-      ? timeA.getTime() - timeB.getTime()
-      : timeB.getTime() - timeA.getTime();
+  const sortedStopsByBusLine = computed(() => {
+    return [...stopsByBusLine.value].sort((a, b) => 
+      isSortingStopsAsc.value
+        ? a.stop.localeCompare(b.stop)
+        : b.stop.localeCompare(a.stop)
+    );
   });
-});
 
-const stopsByBusLine = computed(() => 
-  store.getters['timetable/stopsByBusLine'](selectedBusLine.value)
-);
+  const sortedTimesForStopInBusLine = computed(() => {
+    const timeToDate = (time: string): Date => {
+      const [hours, minutes] = time.split(':').map(Number);
+      return new Date(0, 0, 0, hours, minutes);
+    };
 
-const timesForStopInBusLine = computed(() => 
-  selectedBusLine.value && selectedStop.value 
-    ? store.getters['timetable/timesForStopInBusLine'](selectedBusLine.value, selectedStop.value)
-    : []
-);
+    return [...timesForStopInBusLine.value].sort((a, b) => {
+      const timeA = timeToDate(a);
+      const timeB = timeToDate(b);
 
-const selectStop = (stop: string) => store.dispatch('timetable/selectStop', stop);
+      return isSortingTimesAsc.value
+        ? timeA.getTime() - timeB.getTime()
+        : timeB.getTime() - timeA.getTime();
+    });
+  });
+
+  const stopsByBusLine = computed(() => 
+    store.getters['timetable/stopsByBusLine'](selectedBusLine.value)
+  );
+
+  const timesForStopInBusLine = computed(() => 
+    selectedBusLine.value && selectedStop.value 
+      ? store.getters['timetable/timesForStopInBusLine'](selectedBusLine.value, selectedStop.value)
+      : []
+  );
+
+  const selectStop = (stop: string) => store.dispatch('timetable/selectStop', stop);
 </script>
 
 <template>
