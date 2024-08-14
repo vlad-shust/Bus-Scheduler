@@ -1,12 +1,6 @@
 import { ref, watchEffect } from 'vue';
 import axios from 'axios';
-
-interface Stop {
-  line: number;
-  stop: string;
-  order: number;
-  time: string;
-}
+import { Stop } from '@/types/stop';
 
 export function useFetchStops() {
   const data = ref<Stop[]>([]);

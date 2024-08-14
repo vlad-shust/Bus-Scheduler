@@ -1,13 +1,7 @@
 import { Module } from 'vuex';
 import { watchEffect } from 'vue';
 import { useFetchStops } from '@/composables/useFetchStops';
-
-interface Stop {
-  line: number;
-  stop: string;
-  order: number;
-  time: string;
-}
+import { Stop } from '@/types/stop';
 
 interface TimetableState {
   stops: Array<Stop>;

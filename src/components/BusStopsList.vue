@@ -1,13 +1,7 @@
 <script setup lang="ts">
   import { computed, ref, onMounted } from 'vue';
   import { useStore } from 'vuex';
-
-  interface Stop {
-    line: number;
-    stop: string;
-    order: number;
-    time: string;
-  }
+	import { Stop } from '@/types/stop';
 
   const store = useStore();
   const searchQuery = ref('');
